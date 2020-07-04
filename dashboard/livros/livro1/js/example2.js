@@ -5,7 +5,7 @@ let qtd = 20;
 let auto = false;
 let narracao = [];
 var mouseScroll, title;
-var clicado = [12];
+var clicado = [];
 var mouse = new THREE.Vector2();
 var raycaster = new THREE.Raycaster();
 
@@ -38,7 +38,7 @@ function init() {
     });
 
 
-    // generate some boxes in a column
+    // Adicionando todos os elementos da tela
     const mesh = new THREE.Mesh(new THREE.PlaneGeometry(3, 2), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('assets/florest.jpg'), color: 0xffffff }));
     mesh.position.y = start;
     scene.add(mesh);
@@ -49,6 +49,16 @@ function init() {
     var chapeuzin = (new THREE.Mesh(new THREE.PlaneGeometry(.2, .3), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('assets/Chapeuzinho.png'), transparent: true })))
     chapeuzin.position.y = start + .4;
     scene.add(chapeuzin);
+
+    var lobo = (new THREE.Mesh(new THREE.PlaneGeometry(.2, .3), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('assets/Lobo.png'), transparent: true })))
+    lobo.position.y = start + .4;
+    lobo.position.x = .2;
+    scene.add(lobo);
+
+    var caca = (new THREE.Mesh(new THREE.PlaneGeometry(.2, .3), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('assets/Caçador.png'), transparent: true })))
+    caca.position.y = start + .4;
+    caca.position.x = -.2;
+    scene.add(caca);
 
     var by = new THREE.Mesh(new THREE.PlaneGeometry(.7, .2), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('textos/by.png'), transparent: true }))
     by.position.y = 0.8
@@ -71,19 +81,18 @@ function init() {
     balao.position.x = -.2;
     scene.add(balao)
 
-    var n3 = (new THREE.Mesh(new THREE.PlaneGeometry(1.4, .3), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('textos/text3.png'), transparent: true })))
+    var n3 = (new THREE.Mesh(new THREE.PlaneGeometry(1, .3), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('textos/text3.png'), transparent: true })))
     n3.position.x = 0.2
     n3.position.y = 0.1;
     balao.add(n3);
 
-    var n4 = (new THREE.Mesh(new THREE.PlaneGeometry(1.4, .3), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('textos/text4.png'), transparent: true })))
+    var n4 = (new THREE.Mesh(new THREE.PlaneGeometry(1, .3), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('textos/text4.png'), transparent: true })))
     n4.position.y = start - 3.5;
     scene.add(n4);
 
-    var n5 = (new THREE.Mesh(new THREE.PlaneGeometry(1.4, .3), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('textos/text5.png'), transparent: true })))
+    var n5 = (new THREE.Mesh(new THREE.PlaneGeometry(1, .3), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('textos/text5.png'), transparent: true })))
     n5.position.y = start - 4;
     scene.add(n5);
-
 
     var balao1 = new THREE.Mesh(new THREE.PlaneGeometry(1, .8), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('assets/dialogo1.png'), transparent: true }))
     balao1.position.y = start - 4.8;
@@ -139,13 +148,6 @@ function init() {
 
 
 
-
-
-
-
-
-
-
     //variaveis para auxiliar animaç~eos
     var yoyo = true;
     var initialY = chapeuzin.position.y;
@@ -198,6 +200,7 @@ function init() {
         if (mouseScroll.position.y >= 19.30) {
             yoyo = true;
         }
+        
     }
     animate();
 
@@ -215,6 +218,7 @@ function onMouseMove(event) {
 
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+    console.log(mouse.x,mouse.y)
 
 }
 function render() {
@@ -223,14 +227,11 @@ function render() {
     
     for (var i = 0; i < intersects.length; i++) {
 
-        console.log(intersects[i].object.id);
-        if (intersects[i].object.id == 14 && !(intersects[i].object.id in clicado)) {
-            clicado.push(intersects[i].object.id);
-            alert(1);
-        }else{
-            break;
+        // console.log(intersects[i].object.id);
+        if (intersects[i].object.id == 16 && camera.position.y<= 18) {
+            var a  = setInterval(()=>alert(1),30000);
+            clearInterval(a)
         }
-
     }
 }
 

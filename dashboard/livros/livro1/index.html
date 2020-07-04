@@ -11,26 +11,70 @@
         canvas {
             display: block;
         }
-        button{
+
+        button {
             position: fixed;
             background-color: black;
             border-color: transparent;
-            color:white;
+            color: white;
             border-radius: 50%;
             width: 100px;
             height: 100px;
             font-size: small;
             margin: 20px;
         }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            position: fixed;
+            background-color: white;
+            left: 50%;
+            top: 20%;
+            transform: translate(-50%, 0);
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            padding: 2px 16px;
+        }
+        #card{
+            display: none;
+            width: 25vw;
+        }
     </style>
 </head>
 
 <body>
+    <div id='card' class="card" onclick="hide()">
+        <img src="assets/chibicard.png" alt="Avatar" style="width:100%">
+        <div class="container">
+            <h4><b>Chapeuzinho</b></h4>
+            <p>
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                </svg>
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                </svg>
+
+            </p>
+            <p>Pequena, meiga e sempre pronta para levar cesta de comida para sua avó!</p>
+
+        </div>
+    </div>
     <button id="but" onclick="autoscroll();">Auto</button>
     <script src="js/three.js"></script>
     <script src="js/base.js"></script>
     <script src="js/example2.js"></script>
-    
+
 </body>
 
 </html>

@@ -1,21 +1,36 @@
-var xmlhttp = new XMLHttpRequest();
-var url = "myTutorials.txt";
+// caso precise
+//  var xmlhttp = new XMLHttpRequest();
+// var url = "myTutorials.txt";
 
-xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        var myArr = JSON.parse(this.responseText);
-        myFunction(myArr);
-    }
-};
-xmlhttp.open("GET", url, true);
-xmlhttp.send();
+// xmlhttp.onreadystatechange = function() {
+//     if (this.readyState == 4 && this.status == 200) {
+//         var myArr = JSON.parse(this.responseText);
+//         myFunction(myArr);
+//     }
+// };
+// xmlhttp.open("GET", url, true);
+// xmlhttp.send();
 
-function myFunction(arr) {
-    var out = "";
-    var i;
-    for(i = 0; i < arr.length; i++) {
-        out += '<a href="' + arr[i].url + '">' +
-        arr[i].display + '</a><br>';
+// function myFunction(arr) {
+//     var out = "";
+//     var i;
+//     for(i = 0; i < arr.length; i++) {
+//         out += '<a href="' + arr[i].url + '">' +
+//         arr[i].display + '</a><br>';
+//     }
+//     document.getElementById("id01").innerHTML = out;
+// }
+
+function tecla(event) {
+    console.log(event.keyCode);
+    if(event.keyCode == 120){
+        document.getElementById("card").style.display="block";
     }
-    document.getElementById("id01").innerHTML = out;
 }
+
+function hide(){
+    document.getElementById("card").style.display="none";
+
+}
+
+document.body.onkeypress = tecla;
