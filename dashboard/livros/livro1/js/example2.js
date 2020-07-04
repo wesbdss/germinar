@@ -5,11 +5,18 @@ let qtd = 20;
 let auto = false;
 let narracao = [];
 var mouseScroll, title;
+var clicado = [12];
+var mouse = new THREE.Vector2();
+var raycaster = new THREE.Raycaster();
+
 init();
 
 
 
+
+
 function init() {
+
 
     camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.01, 10);
     camera.position.set(0, start, 2);
@@ -130,41 +137,54 @@ function init() {
     var a = document.body.appendChild(renderer.domElement);
     renderer.setClearColor(0xacebc1);
 
-    
+
+
+
+
+
+
+
+
+
     //variaveis para auxiliar animaç~eos
     var yoyo = true;
-    var initialY=chapeuzin.position.y;
+    var initialY = chapeuzin.position.y;
     var jump = true;
-    var sobe= true;
+    var sobe = true;
+
+
+    /*
+     * Função de animação
+     */
     function animate() {
-        
-        
+
+
         // console.log(chapeuzin.position.y, initialY);
         jumpanimation();
         scrollanimation();
-        
 
+        render();
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
 
     }
-    setInterval(function(){jump=true},2000);
+    setInterval(function () { jump = true }, 2000);
 
-    function jumpanimation(){
-        
-        if(sobe && jump){
+    function jumpanimation() {
+
+        if (sobe && jump) {
             chapeuzin.position.y += 0.008;
-            if(chapeuzin.position.y >= 20.5) sobe = false;
-        }else if(!sobe && jump){
+            if (chapeuzin.position.y >= 20.5) sobe = false;
+        } else if (!sobe && jump) {
             chapeuzin.position.y -= 0.008;
-            if(chapeuzin.position.y <= initialY){
-                jump= false;
+            if (chapeuzin.position.y <= initialY) {
+                jump = false;
                 sobe = true;
-            } 
+            }
         }
     }
 
-    function scrollanimation(){
+    function scrollanimation() {
         // efeito yoyo
         if (yoyo) {
             mouseScroll.position.y -= 0.001;
@@ -183,9 +203,36 @@ function init() {
 
     window.addEventListener('wheel', onMouseWheel, false);
     window.addEventListener('resize', onWindowResize, false);
+    window.addEventListener('click', onMouseMove, false);
 }
 
 
+
+function onMouseMove(event) {
+
+    // calculate mouse position in normalized device coordinates
+    // (-1 to +1) for both components
+
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+}
+function render() {
+    raycaster.setFromCamera(mouse, camera);
+    var intersects = raycaster.intersectObjects(scene.children);
+    
+    for (var i = 0; i < intersects.length; i++) {
+
+        console.log(intersects[i].object.id);
+        if (intersects[i].object.id == 14 && !(intersects[i].object.id in clicado)) {
+            clicado.push(intersects[i].object.id);
+            alert(1);
+        }else{
+            break;
+        }
+
+    }
+}
 
 
 
@@ -239,4 +286,5 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 
 }
+
 
