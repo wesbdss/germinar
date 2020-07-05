@@ -41,11 +41,12 @@ function init() {
     // Adicionando todos os elementos da tela
     const mesh = new THREE.Mesh(new THREE.PlaneGeometry(3, 2), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('assets/florest.jpg'), color: 0xffffff }));
     mesh.position.y = start;
-    title.position.z = 0.1
+    
     scene.add(mesh);
 
     
     title = new THREE.Mesh(new THREE.PlaneGeometry(1.5, .5), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('textos/title.png'), transparent: true }))
+    title.position.z = 0.1
     mesh.add(title)
 
     var chapeuzin = (new THREE.Mesh(new THREE.PlaneGeometry(.2, .3), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('assets/Chapeuzinho.png'), transparent: true })))
