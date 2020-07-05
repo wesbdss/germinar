@@ -4,7 +4,7 @@ let start = 20;
 let qtd = 20;
 let auto = false;
 let narracao = [];
-var mouseScroll, title;
+var mouseScroll;
 var clicado = [];
 var mouse = new THREE.Vector2();
 var raycaster = new THREE.Raycaster();
@@ -41,12 +41,11 @@ function init() {
     // Adicionando todos os elementos da tela
     const mesh = new THREE.Mesh(new THREE.PlaneGeometry(3, 2), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('assets/florest.jpg'), color: 0xffffff }));
     mesh.position.y = start;
-    
+
     scene.add(mesh);
 
-    
-    title = new THREE.Mesh(new THREE.PlaneGeometry(1.5, .5), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('textos/title.png'), transparent: true }))
-    title.position.z = 0.1
+
+    const title = new THREE.Mesh(new THREE.PlaneGeometry(1.5, .5), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('textos/title.png'), transparent: true }))
     mesh.add(title)
 
     var chapeuzin = (new THREE.Mesh(new THREE.PlaneGeometry(.2, .3), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('assets/Chapeuzinho.png'), transparent: true })))
@@ -73,6 +72,7 @@ function init() {
 
     var n1 = (new THREE.Mesh(new THREE.PlaneGeometry(1, .3), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('textos/text1.png'), transparent: true })))
     n1.position.y = start - 1.5;
+    n1.name = "text1"
     scene.add(n1);
 
     var n2 = (new THREE.Mesh(new THREE.PlaneGeometry(1, .1), new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('textos/text2.png'), transparent: true })))
@@ -203,7 +203,7 @@ function init() {
         if (mouseScroll.position.y >= 19.30) {
             yoyo = true;
         }
-        
+
     }
     animate();
 
@@ -221,21 +221,18 @@ function onMouseMove(event) {
 
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-    console.log(mouse.x,mouse.y)
+    for (var i = 0; i < intersects.length; i++) {
+        console.log(intersects[i].object.id);
+        if(intersects[i].object.id == 18)
+        intersects[i].object.material.color.set(0xe26d5a);
+    }
 
 }
+var intersects;
 function render() {
     raycaster.setFromCamera(mouse, camera);
-    var intersects = raycaster.intersectObjects(scene.children);
-    
-    for (var i = 0; i < intersects.length; i++) {
+    intersects = raycaster.intersectObjects(scene.children);
 
-        // console.log(intersects[i].object.id);
-        if (intersects[i].object.id == 16 && camera.position.y<= 18) {
-            var a  = setInterval(()=>alert(1),30000);
-            clearInterval(a)
-        }
-    }
 }
 
 
